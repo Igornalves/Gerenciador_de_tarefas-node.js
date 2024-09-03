@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "prisma": "npx prisma generate",
     "test": "vitest"
   },
   "author": "igor",
