@@ -114,6 +114,9 @@ allRoutes.use(express.json());
  *               concluida:
  *                 type: boolean
  *                 example: false
+ *               userId:
+ *                 type: string
+ *                 example: uuid-do-usuario
  *     responses:
  *       201:
  *         description: Tarefa criada com sucesso

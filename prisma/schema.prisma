@@ -14,6 +14,7 @@ model User {
   username  String
   email     String   @unique
   password  String   @unique
+  tasks Task[]
 
   @@map("users")
 }
@@ -23,4 +24,8 @@ model Task {
   createdAt DateTime @default(now())
   descricao String
   concluida Boolean
+  userId    String
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("tasks")
 }

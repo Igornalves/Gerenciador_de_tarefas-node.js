@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export async function CriandoTask(req: Request, res: Response) {
     try {
-        const { descricao, concluida } = req.body;
+        const { descricao, concluida, userId } = req.body;
 
         if (!descricao || typeof concluida !== "boolean") {
             return res.status(400).json({ error: "A descrição e o status de conclusão são obrigatórios" });
@@ -15,6 +15,7 @@ export async function CriandoTask(req: Request, res: Response) {
             data: {
                 descricao,
                 concluida,
+                user: { connect: { id: userId } }
             },
         });
 
