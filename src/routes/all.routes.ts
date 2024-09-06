@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import express from 'express'
+import cors from 'cors';
 import { CriandoUser } from '../controller/users/Criando'
 import { DeletarUser } from '../controller/users/Deletando'
 import { CriandoTask } from '../controller/tasks/Criando'
@@ -8,6 +9,14 @@ import { ListandoTask } from '../controller/tasks/Listando'
 import { ListandoUsers } from '../controller/users/Listando'
 
 export const allRoutes = Router()
+
+// allRoutes.use(cors({
+//     origin: 'http://192.168.1.102:5173', // Permita apenas o front-end acessar
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+//     allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
+// }));
+
+allRoutes.use(cors());
 
 /**
  * @openapi
