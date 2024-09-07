@@ -18,6 +18,7 @@ export const allRoutes = Router()
 // }));
 
 allRoutes.use(cors());
+allRoutes.use(express.json());
 
 /**
  * @openapi
@@ -45,7 +46,6 @@ allRoutes.get('/coisa', (req,res) => {
     res.send('coisa para mim!!!')
 })
 
-allRoutes.use(express.json());
 /**
  * @openapi
  * /CriandoUser:
@@ -77,14 +77,14 @@ allRoutes.use(express.json());
  *         description: Campos obrigatórios ausentes
  *       500:
  *         description: Erro ao criar usuário
-*/
+ */
 allRoutes.post('/CriandoUser', CriandoUser)
 
 /**
  * @openapi
  * /login:
  *   post:
- *     summary: Autentica um usuário
+ *     summary: Autentica um usuário e retorna um token JWT
  *     requestBody:
  *       required: true
  *       content:
@@ -101,6 +101,17 @@ allRoutes.post('/CriandoUser', CriandoUser)
  *     responses:
  *       200:
  *         description: Login bem-sucedido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Login bem-sucedido!"
+ *                 token:
+ *                   type: string
+ *                   example: "JWT-TOKEN-AQUI"
  *       401:
  *         description: Credenciais inválidas
  *       500:
@@ -108,7 +119,6 @@ allRoutes.post('/CriandoUser', CriandoUser)
  */
 allRoutes.post('/login', authenticateUser);
 
-allRoutes.use(express.json());
 /**
  * @openapi
  * /users/deletando/{id}:
@@ -133,7 +143,6 @@ allRoutes.use(express.json());
 */
 allRoutes.delete("/users/deletando/:id", DeletarUser);
 
-allRoutes.use(express.json()); 
 /**
  * @openapi
  * /CriandoTasks:
@@ -165,7 +174,6 @@ allRoutes.use(express.json());
  */
 allRoutes.post("/CriandoTasks", CriandoTask);
 
-allRoutes.use(express.json());
 /**
  * @openapi
  * /tasks/deletando/{id}:
@@ -204,7 +212,6 @@ allRoutes.use(express.json());
  */
 allRoutes.get("/tasks/listagem", ListandoTask);
 
-allRoutes.use(express.json());
 /**
  * @openapi
  * /users/listagem:
