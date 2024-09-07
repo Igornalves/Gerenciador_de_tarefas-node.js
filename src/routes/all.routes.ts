@@ -7,6 +7,7 @@ import { CriandoTask } from '../controller/tasks/Criando'
 import { DeletarTask } from '../controller/tasks/Deletando'
 import { ListandoTask } from '../controller/tasks/Listando'
 import { ListandoUsers } from '../controller/users/Listando'
+import { authenticateUser } from '../controller/users/Autenticando';
 
 export const allRoutes = Router()
 
@@ -76,8 +77,36 @@ allRoutes.use(express.json());
  *         description: Campos obrigatórios ausentes
  *       500:
  *         description: Erro ao criar usuário
- */
+*/
 allRoutes.post('/CriandoUser', CriandoUser)
+
+/**
+ * @openapi
+ * /login:
+ *   post:
+ *     summary: Autentica um usuário
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 example: maizena
+ *               password:
+ *                 type: string
+ *                 example: 1234
+ *     responses:
+ *       200:
+ *         description: Login bem-sucedido
+ *       401:
+ *         description: Credenciais inválidas
+ *       500:
+ *         description: Erro ao processar a solicitação
+ */
+allRoutes.post('/login', authenticateUser);
 
 allRoutes.use(express.json());
 /**
@@ -101,7 +130,7 @@ allRoutes.use(express.json());
  *         description: Usuário não encontrado
  *       500:
  *         description: Erro ao deletar usuário
- */
+*/
 allRoutes.delete("/users/deletando/:id", DeletarUser);
 
 allRoutes.use(express.json()); 
@@ -188,3 +217,4 @@ allRoutes.use(express.json());
  *         description: Erro ao listar usuários
  */
 allRoutes.get("/users/listagem", ListandoUsers);
+
