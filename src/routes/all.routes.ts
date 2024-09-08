@@ -9,6 +9,7 @@ import { ListandoTask } from '../controller/tasks/Listando'
 import { ListandoUsers } from '../controller/users/Listando'
 import { authenticateUser } from '../controller/users/Autenticando';
 import { editandoTaks } from '../controller/tasks/Editando';
+import { authenticateTokenTasks } from '../controller/tasks/authenticateTokenTasks';
 
 export const allRoutes = Router()
 
@@ -175,6 +176,8 @@ allRoutes.post('/login', authenticateUser);
  *       500:
  *         description: Erro ao criar tarefa
  */
+allRoutes.use('/CriandoTasks', authenticateTokenTasks);
+
 allRoutes.post('/CriandoTasks', (req, res, next) => {
     console.log('Requisição recebida em /CriandoTasks:', req.body);
     next();
@@ -263,7 +266,7 @@ allRoutes.patch('/tasks/editar/:id', editandoTaks)
  *       500:
  *         description: Erro ao listar tarefas
  */
-allRoutes.get("/tasks/listagem", ListandoTask);
+allRoutes.get("/tasks/listagem", authenticateTokenTasks, ListandoTask);
 
 /**
  * @openapi
