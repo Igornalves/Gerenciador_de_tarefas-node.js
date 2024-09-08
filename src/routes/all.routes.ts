@@ -12,16 +12,13 @@ import { editandoTaks } from '../controller/tasks/Editando';
 
 export const allRoutes = Router()
 
-// allRoutes.use(cors({
-//     origin: 'http://192.168.1.102:5173', // Permita apenas o front-end acessar
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
+// allRoutes.use(cors({ 
+//     origin: 'https://gerenciador-de-tarefas-interface-react.vercel.app/',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', ], // Métodos permitidos
 //     allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
 // }));
 
-allRoutes.use(cors({ 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
-    allowedHeaders: ['Content-Type', 'Authorization'] // Cabeçalhos permitidos
-}));
+allRoutes.use(cors());
 allRoutes.use(express.json());
 
 /**
