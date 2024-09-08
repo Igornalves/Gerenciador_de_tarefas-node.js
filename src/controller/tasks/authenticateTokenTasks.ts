@@ -17,7 +17,7 @@ export function authenticateTokenTasks(req: Request, res: Response, next: NextFu
         req.user = {
             id: user.id,
             username: user.username
-        }; // Configurando o objeto user com id e username
+        };
         next();
     });
 }

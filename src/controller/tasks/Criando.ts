@@ -18,7 +18,6 @@ export async function CriandoTask(req: Request, res: Response) {
     }
 
     try {
-        // Decodificar o token para obter o ID do usuário
         const decoded = jwt.verify(token, jwtSecret) as { id: string };
         const userId = decoded.id;
 
@@ -26,7 +25,6 @@ export async function CriandoTask(req: Request, res: Response) {
             return res.status(401).json({ error: "Usuário não encontrado no token" });
         }
 
-        // Verificar se o usuário existe
         const userExists = await prisma.user.findUnique({
             where: {
                 id: userId
@@ -37,7 +35,6 @@ export async function CriandoTask(req: Request, res: Response) {
             return res.status(404).json({ error: "Usuário não encontrado" });
         }
 
-        // Criar a tarefa associada ao usuário
         const newTask = await prisma.task.create({
             data: {
                 descricao,

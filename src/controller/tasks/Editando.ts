@@ -8,12 +8,10 @@ export async function editandoTaks(req: Request, res: Response) {
         const { id } = req.params;
         const { concluida } = req.body;
 
-        // Verifica se o campo de conclusão foi fornecido
         if (concluida === undefined) {
             return res.status(400).json({ error: "O campo 'concluida' deve ser fornecido para atualização" });
         }
 
-        // Atualiza a tarefa apenas com o campo 'concluida'
         const updatedTask = await prisma.task.update({
             where: { id },
             data: {
