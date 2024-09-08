@@ -35,13 +35,23 @@ export async function authenticateUser(req: Request, res: Response) {
             return res.status(401).json({ error: 'Credenciais inválidas.' });
         }
 
-        const token = jwt.sign({ id: user.id, username: user.username }, jwtSecret, { expiresIn: '1h' });
+        const expiresIn = '1d'; // Tempo de expiração do token
+        const token = jwt.sign({ id: user.id, username: user.username }, jwtSecret, { expiresIn });
+
+        // Calcule a data de expiração
+        const expirationDate = new Date();
+        expirationDate.setSeconds(expirationDate.getSeconds() + 86400); // 1 dia em segundos
 
         console.log('Login bem-sucedido!');
 
-        return res.json({ message: 'Login bem-sucedido!', token });
+        return res.json({ 
+            message: 'Login bem-sucedido!', 
+            token,
+            expiration: expirationDate.toISOString() // Envie a expiração como string ISO
+        });
     } catch (error) {
         console.error('Erro ao tentar autenticar:', error);
         return res.status(500).json({ error: 'Erro ao tentar autenticar. Tente novamente mais tarde.' });
     }   
 }
+

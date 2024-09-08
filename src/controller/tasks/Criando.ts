@@ -11,6 +11,14 @@ export async function CriandoTask(req: Request, res: Response) {
             return res.status(400).json({ error: "A descrição e o status de conclusão são obrigatórios" });
         }
 
+        const userExists = await prisma.user.findUnique({
+            where: { id: userId }
+        });
+
+        if (!userExists) {
+            return res.status(404).json({ error: "Usuário não encontrado" });
+        }
+
         const createdTask = await prisma.task.create({
             data: {
                 descricao,

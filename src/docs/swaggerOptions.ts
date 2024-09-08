@@ -3,7 +3,7 @@ export const swaggerOptions = {
       openapi: '3.0.0',
       info: {
         title: 'Minha API Express',
-        version: '1.0.0',
+        version: '1.0.5',
         description: 'Documentação gerada dinamicamente pela API Express com Swagger, essa documentacao é de um sistema de gerenciamente de tarefas utilizando tecnologias para a Vaga de Estagio',
       },
     },
