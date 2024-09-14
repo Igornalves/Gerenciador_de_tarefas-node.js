@@ -1,2 +1,4 @@
 # Diretórios de dependências
 node_modules
+
+src/databases/TaskManager.db
